@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102f55">
+  <meta name="description" content="Simula cuántas horas puede alimentar una estación de energía tus equipos eléctricos.">
+  <title>Simulador de autonomía | Estación de energía</title>
+  <style>
+  :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#17293f;background:#f2f6fa;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 0%,#e2effc 0,transparent 40%),#f2f6fa}button,input{font:inherit}main{width:min(1060px,calc(100% - 32px));margin:36px auto 70px}.header{display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:24px}.eyebrow{letter-spacing:.13em;text-transform:uppercase;font-size:.74rem;color:#3975b7;font-weight:800}.header h1{font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-.05em;margin:6px 0 6px;color:#12375f}.subtitle{color:#60738a;margin:0;line-height:1.55}.bolt{background:#dbeafa;color:#145aa0;border-radius:18px;padding:16px;font-size:31px;box-shadow:0 8px 20px #143e7120}.layout{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(300px,.84fr);gap:20px}.panel{background:#fff;border:1px solid #e0e9f2;border-radius:22px;padding:26px;box-shadow:0 12px 45px #163d6110}.panel h2{font-size:1.15rem;margin:0 0 6px;color:#183e68}.help{font-size:.87rem;color:#6c7d8d;line-height:1.5;margin:0 0 24px}.control{margin:22px 0}.controltop{display:flex;align-items:center;justify-content:space-between;gap:12px}.control label{font-weight:700;font-size:.93rem}.pill{min-width:90px;text-align:center;background:#eaf3ff;border:1px solid #d1e6fd;color:#145491;padding:7px 12px;border-radius:11px;font-weight:800;font-variant-numeric:tabular-nums}input[type=range]{width:100%;margin:17px 0 5px;accent-color:#1976d2;cursor:pointer}.ticks{display:flex;justify-content:space-between;font-size:.77rem;color:#8594a2}.info{display:block;font-size:.79rem;color:#78899b;margin:7px 0}.divider{height:1px;background:#e4ebf2;margin:24px 0}.selectrow{display:flex;gap:9px;flex-wrap:wrap}.choice{padding:9px 12px;border:1px solid #d7e4f2;border-radius:12px;background:#fff;color:#274667;cursor:pointer;font-size:.86rem;font-weight:700}.choice.active{background:#e9f3ff;border-color:#1976d2;color:#095aa7}.result{background:linear-gradient(145deg,#123a66,#075d9c);color:white;border-radius:18px;padding:26px;margin:10px 0 19px;position:relative;overflow:hidden}.result:after{content:'⚡';position:absolute;font-size:115px;right:-14px;top:-30px;opacity:.09}.result small{font-size:.76rem;letter-spacing:.12em;font-weight:800;opacity:.81}.time{font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.2;font-weight:850;letter-spacing:-.05em;margin:12px 0 6px;font-variant-numeric:tabular-nums}.detail{font-size:.85rem;opacity:.88}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f3f7fb;border:1px solid #e4edf6;padding:17px;border-radius:14px}.stat .value{font-size:1.45rem;font-weight:850;color:#174d82;margin:6px 0 0;font-variant-numeric:tabular-nums}.stat .label{color:#678095;font-size:.79rem}.meter{margin:20px 0 8px;height:13px;background:#e2edf8;border-radius:99px;overflow:hidden}.meterfill{height:100%;width:85%;background:linear-gradient(90deg,#368eda,#07b6a6);border-radius:99px;transition:width .15s}.foot{font-size:.79rem;line-height:1.55;color:#62788e}.actions{display:flex;gap:10px;margin-top:19px;flex-wrap:wrap}.btn{padding:12px 16px;border-radius:12px;border:1px solid #ccddeb;background:white;color:#1a4d7d;font-weight:750;cursor:pointer}.btn.primary{background:#1466b0;border-color:#1466b0;color:#fff}.btn:hover,.choice:hover{filter:brightness(.96)}.note{margin-top:18px;padding:18px 20px;background:#fff9e9;border:1px solid #f7e4b3;border-radius:16px;color:#6f5a26;font-size:.87rem;line-height:1.6}footer{text-align:center;font-size:.78rem;color:#8795a4;margin-top:28px}@media(max-width:750px){main{margin-top:24px}.layout{grid-template-columns:1fr}.panel{padding:21px}.bolt{display:none}}@media print{body{background:white}main{margin:0 auto}.actions{display:none}.panel{box-shadow:none}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="header"><div><div class="eyebrow">Herramienta interactiva</div><h1>Simulador de autonomía</h1><p class="subtitle">Descubre cuánto puede durar tu batería con los equipos conectados.</p></div><div class="bolt" aria-hidden="true">⚡</div></div>
+  <div class="layout">
+    <section class="panel" aria-labelledby="configtitle">
+      <h2 id="configtitle">Configura tu simulación</h2><p class="help">Mueve los controles para ajustar el consumo. Los resultados se actualizan al instante.</p>
+      <div class="control"><div class="controltop"><label for="capacity">Capacidad de batería</label><output class="pill" id="capacityValue">320 Wh</output></div><input id="capacity" type="range" min="100" max="3000" value="320" step="10"><div class="ticks"><span>100 Wh</span><span>3000 Wh</span></div><span class="info">BLUETTI Premium 30: 320 Wh de capacidad nominal.</span></div>
+      <div class="divider"></div>
+      <div class="control"><div class="controltop"><label for="laptop">Consumo de laptop</label><output class="pill" id="laptopValue">35 W</output></div><input id="laptop" type="range" min="0" max="150" value="35" step="5"><div class="ticks"><span>0 W</span><span>150 W</span></div><span class="info">Ejemplo orientativo de laptop trabajando: 35 W.</span></div>
+      <div class="control"><div class="controltop"><label for="fan">Consumo de ventilador</label><output class="pill" id="fanValue">50 W</output></div><input id="fan" type="range" min="0" max="160" value="50" step="5"><div class="ticks"><span>0 W</span><span>160 W</span></div><span class="info">Ejemplo orientativo de ventilador doméstico: 50 W.</span></div>
+      <div class="control"><div class="controltop"><label for="other">Otros equipos conectados</label><output class="pill" id="otherValue">0 W</output></div><input id="other" type="range" min="0" max="500" value="0" step="5"><div class="ticks"><span>0 W</span><span>500 W</span></div></div>
+      <div class="divider"></div>
+      <div class="control"><div class="controltop"><label for="efficiency">Energía aprovechable estimada</label><output class="pill" id="efficiencyValue">85 %</output></div><input id="efficiency" type="range" min="65" max="95" value="85" step="1"><div class="ticks"><span>65 %</span><span>95 %</span></div><span class="info">Considera pérdidas de conversión y operación. Un 85 % es un supuesto orientativo.</span></div>
+      <div class="control"><div class="controltop"><label for="charge">Carga actual de la batería</label><output class="pill" id="chargeValue">100 %</output></div><input id="charge" type="range" min="5" max="100" value="100" step="5"><div class="ticks"><span>5 %</span><span>100 %</span></div></div>
+    </section>
+    <section class="panel" aria-labelledby="resulttitle">
+      <h2 id="resulttitle">Tu resultado</h2><p class="help">Una estimación para planificar cortes de electricidad.</p>
+      <div class="result" aria-live="polite"><small>AUTONOMÍA ESTIMADA</small><div class="time" id="time">3 h 12 min</div><div class="detail" id="description">Con 85 W de consumo total</div></div>
+      <div class="stats"><div class="stat"><div class="label">Consumo combinado</div><div class="value" id="power">85 W</div></div><div class="stat"><div class="label">Energía utilizable</div><div class="value" id="energy">272 Wh</div></div></div>
+      <div class="meter" aria-hidden="true"><div class="meterfill" id="meter"></div></div><div class="foot" id="status">La energía útil representa el 85 % de la batería cargada al 100 %.</div>
+      <div class="actions"><button class="btn primary" id="share" type="button">Compartir configuración</button><button class="btn" id="copy" type="button">Copiar resultado</button><button class="btn" id="reset" type="button">Restablecer</button></div>
+      <div class="note"><strong>Importante:</strong> los 600 W de la BLUETTI indican su potencia máxima de salida, no la duración. La duración depende de los Wh disponibles y de los W consumidos. Este simulador no valida los límites de potencia de cada modelo y no sustituye una medición real.</div>
+    </section>
+  </div>
+  <footer>Simulador de batería · Funciona en tu computador o celular, incluso sin internet después de guardar el archivo.</footer>
+</main>
+<script>
+(function(){'use strict';
+const ids=['capacity','laptop','fan','other','efficiency','charge'];
+const defaults={capacity:320,laptop:35,fan:50,other:0,efficiency:85,charge:100};
+const $=id=>document.getElementById(id);const read=()=>Object.fromEntries(ids.map(id=>[id,Number($(id).value)]));
+const fmt=n=>new Intl.NumberFormat('es-CL',{maximumFractionDigits:0}).format(n);
+function compute(){const v=read();for(const id of ids){$(id+'Value').textContent=fmt(v[id])+(id==='capacity'?' Wh':(id==='efficiency'||id==='charge'?' %':' W'));}
+const total=v.laptop+v.fan+v.other;const useful=v.capacity*v.charge/100*v.efficiency/100;const mins=total>0?Math.round(useful/total*60):0;
+$('time').textContent=total===0?'Sin consumo':`${Math.floor(mins/60)} h ${String(mins%60).padStart(2,'0')} min`;
+$('description').textContent=total===0?'Enciende algún equipo para estimar la duración':`Con ${fmt(total)} W de consumo total`;
+$('power').textContent=fmt(total)+' W';$('energy').textContent=fmt(useful)+' Wh';
+$('meter').style.width=(v.charge*v.efficiency/100)+'%';
+$('status').textContent=`Batería al ${v.charge} % · ${v.efficiency} % de energía aprovechable · ${fmt(useful)} Wh utilizables aproximadamente.`;
+return {v,total,useful,mins};}
+function params(){let url=new URL(location.href);url.search='';let v=read();for(const id of ids)url.searchParams.set(id,String(v[id]));return url.toString();}
+function report(){let r=compute();return `Simulación de autonomía de batería\nCapacidad: ${r.v.capacity} Wh\nCarga: ${r.v.charge} %\nLaptop: ${r.v.laptop} W\nVentilador: ${r.v.fan} W\nOtros equipos: ${r.v.other} W\nEnergía aprovechable: ${r.v.efficiency} %\nConsumo total: ${r.total} W\nEnergía utilizable estimada: ${Math.round(r.useful)} Wh\nAutonomía: ${r.total===0?'Sin equipos conectados':`${Math.floor(r.mins/60)} h ${String(r.mins%60).padStart(2,'0')} min`}\nEstimación orientativa, no medición real.`;}
+async function copyText(str){try{await navigator.clipboard.writeText(str);return true}catch(e){const ta=document.createElement('textarea');ta.value=str;ta.style.position='fixed';ta.style.left='-9999px';document.body.append(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok;}}
+function announce(button,message){const original=button.textContent;button.textContent=message;setTimeout(()=>button.textContent=original,1800);}
+for(const id of ids)$(id).addEventListener('input',compute);
+$('reset').addEventListener('click',()=>{for(const id of ids)$(id).value=defaults[id];compute();});
+$('copy').addEventListener('click',async function(){announce(this,await copyText(report())?'¡Resultado copiado!':'No se pudo copiar');});
+$('share').addEventListener('click',async function(){const url=params();if(location.protocol==='file:'){announce(this,await copyText(report())?'¡Resultado copiado!':'Publica la web para compartir un enlace');return;}if(navigator.share){try{await navigator.share({title:'Simulador de batería',text:'Prueba esta configuración:',url});return}catch(e){if(e.name==='AbortError')return;}}announce(this,await copyText(url)?'¡Enlace copiado!':'No se pudo copiar');});
+const incoming=new URLSearchParams(location.search);for(const id of ids){const x=incoming.get(id);if(x!==null&&x.trim()!==''&&!Number.isNaN(Number(x))){let el=$(id);let value=Number(x);el.value=Math.max(Number(el.min),Math.min(Number(el.max),value));}}
+compute();
+})();
+</script>
+</body>
+</html>
